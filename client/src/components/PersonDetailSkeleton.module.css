@@ -1,0 +1,60 @@
+.skeleton {
+  position: relative;
+  display: grid;
+  gap: 1rem;
+}
+
+.rows {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.bar {
+  display: block;
+  background-color: #e5e7eb;
+  border-radius: 0.25rem;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.titleBar {
+  width: 55%;
+  height: 1.875rem;
+}
+
+.rowBar {
+  width: 70%;
+  height: 1.5rem;
+}
+
+.rowBarShort {
+  width: 50%;
+  height: 1.5rem;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bar {
+    animation: none;
+  }
+}

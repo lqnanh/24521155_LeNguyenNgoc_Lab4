@@ -1,11 +1,14 @@
+import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router";
 import RootLayout from "./layouts/RootLayout.jsx";
 import PeopleLayout from "./layouts/PeopleLayout.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import PeopleIndexPage from "./pages/PeopleIndexPage.jsx";
-import PersonDetailPage from "./pages/PersonDetailPage.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
+import PersonDetailSkeleton from "./components/PersonDetailSkeleton.jsx";
 import { people } from "./data/people.js";
+
+const PersonDetailPage = lazy(() => import("./pages/PersonDetailPage.jsx"));
 
 export default function App() {
   return (
@@ -15,7 +18,14 @@ export default function App() {
 
         <Route path="people" element={<PeopleLayout people={people} />}>
           <Route index element={<PeopleIndexPage />} />
-          <Route path=":id" element={<PersonDetailPage />} />
+          <Route
+            path=":id"
+            element={
+              <Suspense fallback={<PersonDetailSkeleton />}>
+                <PersonDetailPage people={people} />
+              </Suspense>
+            }
+          />
         </Route>
 
         <Route path="*" element={<NotFoundPage />} />

@@ -1,0 +1,40 @@
+.detail {
+  display: grid;
+  gap: 1rem;
+}
+
+.title {
+  font-size: 1.25rem;
+  line-height: 1.875rem;
+}
+
+.list {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  line-height: 1.5rem;
+}
+
+.term {
+  font-weight: 600;
+}
+
+.term::after {
+  content: ":";
+}
+
+.value {
+  margin: 0;
+}
+
+.notFound {
+  color: #b91c1c;
+  font-weight: 600;
+  line-height: 1.5rem;
+}
