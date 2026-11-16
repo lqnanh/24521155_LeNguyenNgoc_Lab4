@@ -29,3 +29,15 @@
 7. Chỉ hiện lỗi sau khi người dùng rời ô hoặc đã bấm Gửi. Trạng thái "đã rời ô / đã gửi" là state bình thường, không dùng useEffect.
 8. Gửi biểu mẫu không tải lại trang (preventDefault). Còn lỗi thì không hiện ShowData và đưa focus về ô sai đầu tiên.
 9. ShowData hiển thị bằng dl/dt/dd, không in JSON.stringify. Không hiện mật khẩu ra màn hình.
+
+## 1.3
+1. Contract API cố định: GET /api/messages/:forum (200, mảng tin nhắn) và POST /api/messages/:forum (body { author, text }, 201 trả tin nhắn mới, 400 { error } nếu sai). Client và server đều theo đúng contract này.
+2. Chỉ có 3 kênh: nasa, esports-tribunal, notNasa. Kênh khác trả 404 { error }. Đường dẫn không tồn tại trả 404 dạng JSON.
+3. Tin nhắn có dạng { id, author, text, timestamp }. id sinh bằng crypto.randomUUID(), timestamp là chuỗi ISO.
+4. Không viết cứng URI, cổng hay bí mật trong code. Server đọc process.env (PORT, CLIENT_ORIGIN, SIMULATED_DELAY_MS), client đọc import.meta.env.VITE_API_URL. Có .env.example, .env nằm trong .gitignore.
+5. CORS chỉ cho phép CLIENT_ORIGIN, không mở cors() cho mọi nguồn.
+6. Server dùng async/await, mọi route bắt lỗi bằng try/catch, không callback kiểu cũ, không có unhandled promise rejection.
+7. useForumMessages dùng AbortController tạo trong useEffect, cleanup gọi controller.abort(). Không dùng cờ didCancel. Dependency array của useEffect phải đúng và đủ, không gây vòng lặp tải lại.
+8. Sau khi abort không được setState (kiểm tra signal.aborted trong try/catch/finally). AbortError không coi là lỗi. Kiểm tra res.ok trước khi đọc dữ liệu, lỗi thật phải hiện ra giao diện.
+9. Kênh đang xem nằm trên URL (/forum/:forum). Tin nhắn hiển thị bằng dl, mỗi tin dùng <React.Fragment key={msg.id}>, không dùng index làm key.
+10. Kiểm tra dữ liệu gửi tin nhắn giống hệt nhau ở client và server (bắt buộc, không toàn khoảng trắng, text tối đa 500 ký tự). Client tính lỗi trong render, không dùng useEffect.

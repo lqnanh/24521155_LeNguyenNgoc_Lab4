@@ -1,6 +1,6 @@
 # AI_FAILURE_AUDIT.md - Lab 4
 
-## 1.1 - Prompt 1 (dữ liệu và các trang)
+## 1.1 
 
 1. NavLink dùng className="nav-link" cố định, dựa vào class active thư viện tự gắn.
    Sửa: đổi thành className={({ isActive }) => ...} theo project-rules 1.1 mục 2.
