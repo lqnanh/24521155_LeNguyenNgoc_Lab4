@@ -30,3 +30,8 @@
 
 9. Thay toàn bộ NavBar.module.css: chữ #1f2937 trên nền header #1e3a8a gần như không đọc được (sai tương phản WCAG), đổi tên class linkActive thành active.
    Sửa: giữ nguyên NavBar.module.css cũ, NavBar.jsx chỉ đổi sang lặp mảng NAV_LINKS và thêm link "Biểu mẫu", vẫn dùng styles.linkActive.
+
+## 1.3
+
+10. Lặp lại lỗi 8–9: viết lại main.jsx sang createBrowserRouter (import PeoplePage đã xoá, mất PeopleLayout, people/:id, lazy, NotFoundPage) trong khi route nằm ở App.jsx; viết lại NavBar.jsx đổi nhãn "Danh bạ" thành "Mọi người" và dùng styles.active thay cho linkActive.
+    Sửa: giữ nguyên main.jsx, chỉ thêm route forum (index → Navigate nasa, :forum → ForumPage) vào App.jsx và thêm 1 phần tử "Diễn đàn" vào NAV_LINKS.
