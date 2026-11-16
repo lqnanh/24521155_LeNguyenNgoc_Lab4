@@ -1,4 +1,5 @@
 import express from 'express';
+import messagesRouter from './routes/messages.js';
 
 export function createApp() {
   const app = express();
@@ -10,6 +11,9 @@ export function createApp() {
   app.get('/api/health', (req, res) => {
     res.status(200).json({ ok: true });
   });
+
+  // Tin nhắn theo kênh
+  app.use('/api/messages', messagesRouter);
 
   // Mọi đường dẫn /api không tồn tại → 404 dạng JSON
   app.use('/api', (req, res) => {
