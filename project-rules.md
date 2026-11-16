@@ -18,3 +18,14 @@
 4. Thông tin chi tiết hiển thị bằng dl/dt/dd.
 5. Trang chi tiết tải bằng React.lazy và bọc trong Suspense. Skeleton phải cao bằng nội dung thật (không giật layout), có aria-busy="true" và aria-live="polite".
 6. Không dùng useState('view') để chuyển màn hình. Mọi màn hình đều đi qua URL.
+
+## 1.2
+1. Không dùng useEffect để kiểm tra lỗi hay đồng bộ dữ liệu giữa các ô. Lỗi tính ngay trong lúc render: const errors = validateForm(values).
+2. validateForm là hàm thuần (cùng đầu vào luôn ra cùng kết quả), nằm trong file riêng, trả về object lỗi theo tên ô. isValid = Object.keys(errors).length === 0.
+3. Dữ liệu biểu mẫu đi qua FormContext (createContext + useFormContext). InputField tự lấy value/error từ context, không truyền props qua nhiều tầng.
+4. Kiểm tra chéo giữa các ô (Nhập lại mật khẩu phải giống Mật khẩu) cũng nằm trong validateForm, không dùng useEffect.
+5. InputField dùng useId() để nối label với input. Không tự đặt id bằng tay hay Math.random().
+6. Ô có lỗi phải có aria-invalid="true" và aria-describedby trỏ tới dòng lỗi. Dòng lỗi có role="alert".
+7. Chỉ hiện lỗi sau khi người dùng rời ô hoặc đã bấm Gửi. Trạng thái "đã rời ô / đã gửi" là state bình thường, không dùng useEffect.
+8. Gửi biểu mẫu không tải lại trang (preventDefault). Còn lỗi thì không hiện ShowData và đưa focus về ô sai đầu tiên.
+9. ShowData hiển thị bằng dl/dt/dd, không in JSON.stringify. Không hiện mật khẩu ra màn hình.
