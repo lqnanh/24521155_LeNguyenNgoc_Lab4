@@ -13,3 +13,9 @@
 
 4. PeopleLayout tự import dữ liệu people, không nhận qua prop, lệch contract slide 23 PeopleLayout({ people }).
    Sửa: App.jsx import people và truyền <PeopleLayout people={people} />.
+
+5. Khung chờ (skeleton) chỉ có role="status", thiếu aria-busy="true" và aria-live="polite" theo project-rules 1.1 mục 5.
+   Sửa: thêm aria-busy="true" aria-live="polite" vào thẻ ngoài của PersonDetailSkeleton.
+
+6. PersonDetailPage tự import people, không nhận qua prop, lệch contract slide 23 PersonDetail({ people }).
+   Sửa: PersonDetailPage nhận { people } qua prop, App.jsx truyền <PersonDetailPage people={people} />.
