@@ -1,8 +1,13 @@
 import express from 'express';
+import cors from 'cors';
+import { createCorsOptions } from './config/corsOptions.js';
 import messagesRouter from './routes/messages.js';
 
 export function createApp() {
   const app = express();
+
+  // Chỉ cho phép client ở địa chỉ CLIENT_ORIGIN gọi API
+  app.use(cors(createCorsOptions()));
 
   // Đọc body JSON (giới hạn nhỏ để tránh request quá lớn)
   app.use(express.json({ limit: '10kb' }));
