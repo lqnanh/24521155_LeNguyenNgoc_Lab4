@@ -1,5 +1,6 @@
 import { NavLink, useParams } from 'react-router';
 import { FORUMS, findForum } from '../forums.js';
+import ForumMessages from '../components/ForumMessages.jsx';
 import styles from './ForumPage.module.css';
 
 function channelClassName({ isActive }) {
@@ -27,9 +28,12 @@ export default function ForumPage() {
       </nav>
 
       {forum ? (
-        <p className={styles.current}>
-          Đang xem kênh: <strong>{forum.label}</strong>
-        </p>
+        <>
+          <p className={styles.current}>
+            Đang xem kênh: <strong>{forum.label}</strong>
+          </p>
+          <ForumMessages forum={forum.id} />
+        </>
       ) : (
         <p role="alert" className={styles.error}>
           Không có kênh "{forumId}". Hãy chọn một kênh ở trên.
