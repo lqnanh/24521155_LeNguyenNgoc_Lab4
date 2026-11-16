@@ -5,6 +5,7 @@ import PeopleLayout from "./layouts/PeopleLayout.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import PeopleIndexPage from "./pages/PeopleIndexPage.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
+import FormPage from "./pages/FormPage.jsx";
 import PersonDetailSkeleton from "./components/PersonDetailSkeleton.jsx";
 import { people } from "./data/people.js";
 
@@ -27,6 +28,8 @@ export default function App() {
             }
           />
         </Route>
+
+        <Route path="form" element={<FormPage />} />
 
         <Route path="*" element={<NotFoundPage />} />
       </Route>
