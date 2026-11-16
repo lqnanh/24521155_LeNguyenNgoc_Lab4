@@ -1,11 +1,11 @@
 import { useParams } from "react-router";
 
 export default function PersonDetailPage() {
-  const { personId } = useParams();
+  const { id } = useParams();
 
   return (
     <section>
-      <h1>Bạn đang ở trang chi tiết của người có mã số {personId}</h1>
+      <h2>Bạn đang ở trang chi tiết của người có mã số {id}</h2>
     </section>
   );
 }

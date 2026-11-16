@@ -1,23 +1,24 @@
 import { Routes, Route } from "react-router";
-import NavBar from "./components/NavBar.jsx";
+import RootLayout from "./layouts/RootLayout.jsx";
+import PeopleLayout from "./layouts/PeopleLayout.jsx";
 import HomePage from "./pages/HomePage.jsx";
-import PeoplePage from "./pages/PeoplePage.jsx";
+import PeopleIndexPage from "./pages/PeopleIndexPage.jsx";
 import PersonDetailPage from "./pages/PersonDetailPage.jsx";
+import NotFoundPage from "./pages/NotFoundPage.jsx";
 
 export default function App() {
   return (
-    <>
-      <header className="site-header">
-        <NavBar />
-      </header>
+    <Routes>
+      <Route path="/" element={<RootLayout />}>
+        <Route index element={<HomePage />} />
 
-      <main className="site-main">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/people" element={<PeoplePage />} />
-          <Route path="/people/:personId" element={<PersonDetailPage />} />
-        </Routes>
-      </main>
-    </>
+        <Route path="people" element={<PeopleLayout />}>
+          <Route index element={<PeopleIndexPage />} />
+          <Route path=":id" element={<PersonDetailPage />} />
+        </Route>
+
+        <Route path="*" element={<NotFoundPage />} />
+      </Route>
+    </Routes>
   );
 }

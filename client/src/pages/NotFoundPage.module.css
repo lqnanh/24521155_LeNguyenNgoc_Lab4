@@ -1,0 +1,19 @@
+.page {
+  display: grid;
+  gap: 0.75rem;
+  justify-items: start;
+}
+
+.homeLink {
+  color: #1d4ed8;
+  font-weight: 500;
+}
+
+.homeLink:hover {
+  color: #1e3a8a;
+}
+
+.homeLink:focus-visible {
+  outline: 3px solid #1d4ed8;
+  outline-offset: 2px;
+}

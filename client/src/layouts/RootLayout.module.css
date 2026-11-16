@@ -1,0 +1,12 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: #1e3a8a;
+}
+
+.main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}

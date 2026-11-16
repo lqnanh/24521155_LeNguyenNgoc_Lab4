@@ -12,53 +12,16 @@ body {
   background-color: #f9fafb;
 }
 
-/* Thanh menu trên cùng */
-.site-header {
-  position: sticky;
-  top: 0;
-  background-color: #1e3a8a;
-}
-
-.nav {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
-
-.nav-list {
-  display: flex;
-  gap: 0.5rem;
+h1,
+h2,
+p {
   margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.nav-link {
-  display: block;
-  padding: 0.875rem 1rem;
-  color: #dbeafe;
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.nav-link:hover {
-  color: #ffffff;
-  background-color: #1d4ed8;
-}
-
-.nav-link.active {
-  color: #ffffff;
-  background-color: #2563eb;
-}
-
-/* Nội dung chính */
-.site-main {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
 }
 
 h1 {
-  margin: 0;
   font-size: 1.5rem;
+}
+
+h2 {
+  font-size: 1.25rem;
 }

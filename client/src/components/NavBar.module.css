@@ -1,0 +1,37 @@
+.nav {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.list {
+  display: flex;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.link {
+  display: block;
+  padding: 0.875rem 1rem;
+  color: #dbeafe;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.link:hover {
+  color: #ffffff;
+  background-color: #1d4ed8;
+}
+
+.linkActive {
+  color: #ffffff;
+  background-color: #2563eb;
+}
+
+.link:focus-visible {
+  outline: 3px solid #facc15;
+  outline-offset: -3px;
+  color: #ffffff;
+}
