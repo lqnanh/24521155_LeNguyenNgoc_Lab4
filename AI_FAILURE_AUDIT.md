@@ -35,3 +35,6 @@
 
 10. Lặp lại lỗi 8–9: viết lại main.jsx sang createBrowserRouter (import PeoplePage đã xoá, mất PeopleLayout, people/:id, lazy, NotFoundPage) trong khi route nằm ở App.jsx; viết lại NavBar.jsx đổi nhãn "Danh bạ" thành "Mọi người" và dùng styles.active thay cho linkActive.
     Sửa: giữ nguyên main.jsx, chỉ thêm route forum (index → Navigate nasa, :forum → ForumPage) vào App.jsx và thêm 1 phần tử "Diễn đàn" vào NAV_LINKS.
+
+11. Tự làm luôn phần CORS (việc của prompt khác) khi đang làm phần hiện tin nhắn, và đổi biến môi trường thành CLIENT_ORIGINS chứa danh sách 4 cổng, lệch project-rules 1.3 mục 4–5 và T-23 (một biến CLIENT_ORIGIN).
+    Sửa: corsOptions.js đọc một biến CLIENT_ORIGIN, .env.example ghi CLIENT_ORIGIN=http://localhost:5173; Vite chạy cổng khác thì chỉ sửa .env.
