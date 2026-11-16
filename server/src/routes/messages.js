@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { getMessagesByForum, addMessage, isValidForum } from '../store/messageStore.js';
 import { validateMessage } from '../shared/messageRules.js';
+import { applySimulatedDelay } from '../config/simulatedDelay.js';
 
 const router = Router();
 
@@ -16,6 +17,7 @@ function serverError(res, err) {
 // GET /api/messages/:forum → 200, mảng tin nhắn cũ trước mới sau
 router.get('/:forum', async (req, res) => {
   try {
+    await applySimulatedDelay();
     const { forum } = req.params;
     if (!(await isValidForum(forum))) {
       return forumNotFound(res, forum);
@@ -34,6 +36,7 @@ router.get('/:forum', async (req, res) => {
 // POST /api/messages/:forum, body { author, text } → 201 tin nhắn vừa tạo
 router.post('/:forum', async (req, res) => {
   try {
+    await applySimulatedDelay();
     const { forum } = req.params;
     if (!(await isValidForum(forum))) {
       return forumNotFound(res, forum);
