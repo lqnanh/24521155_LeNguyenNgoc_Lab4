@@ -4,8 +4,8 @@ export default function PersonDetailPage() {
   const { id } = useParams();
 
   return (
-    <section>
+    <article>
       <h2>Bạn đang ở trang chi tiết của người có mã số {id}</h2>
-    </section>
+    </article>
   );
 }
