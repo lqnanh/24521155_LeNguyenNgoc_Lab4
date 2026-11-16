@@ -19,3 +19,6 @@
 
 6. PersonDetailPage tự import people, không nhận qua prop, lệch contract slide 23 PersonDetail({ people }).
    Sửa: PersonDetailPage nhận { people } qua prop, App.jsx truyền <PersonDetailPage people={people} />.
+
+7. Bỏ dòng favicon khỏi index.html mà không thay bằng gì, Chrome tự tìm /favicon.ico nên Console báo lỗi 404.
+   Sửa: thêm <link rel="icon" href="data:," /> vào <head> của index.html để khai báo icon rỗng.
