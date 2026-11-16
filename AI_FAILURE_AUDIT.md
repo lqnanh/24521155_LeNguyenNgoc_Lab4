@@ -38,3 +38,6 @@
 
 11. Tự làm luôn phần CORS (việc của prompt khác) khi đang làm phần hiện tin nhắn, và đổi biến môi trường thành CLIENT_ORIGINS chứa danh sách 4 cổng, lệch project-rules 1.3 mục 4–5 và T-23 (một biến CLIENT_ORIGIN).
     Sửa: corsOptions.js đọc một biến CLIENT_ORIGIN, .env.example ghi CLIENT_ORIGIN=http://localhost:5173; Vite chạy cổng khác thì chỉ sửa .env.
+
+12. Prompt đã ghi rõ "giữ PORT và CLIENT_ORIGIN" nhưng .env.example AI trả về vẫn dùng CLIENT_ORIGINS theo code cũ nó nhớ, không theo code thật. Dùng nguyên file này thì CORS âm thầm chặn trình duyệt.
+    Sửa: .env.example giữ CLIENT_ORIGIN=http://localhost:5173, chỉ thêm SIMULATED_DELAY_MS=0.
