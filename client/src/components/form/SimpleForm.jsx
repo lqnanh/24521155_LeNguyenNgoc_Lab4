@@ -1,14 +1,31 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { flushSync } from "react-dom";
 import { FormContext } from "./FormContext.js";
 import InputField from "./InputField.jsx";
-import { FIELD_NAMES, INITIAL_VALUES, validateForm } from "./validateForm.js";
+import ShowData from "./ShowData.jsx";
+import { validateForm } from "./validateForm.js";
+import {
+  FIELD_LABELS,
+  FIELD_NAMES,
+  FIELD_ORDER,
+  INITIAL_VALUES,
+  SECRET_FIELDS,
+} from "./formFields.js";
 import styles from "./SimpleForm.module.css";
 
+const SUBMIT_STATUS = {
+  idle: "idle",
+  success: "success",
+  error: "error",
+};
+
 function SimpleForm({ initialValues = INITIAL_VALUES }) {
+  const formRef = useRef(null);
   const [values, setValues] = useState(initialValues);
   const [touched, setTouched] = useState({});
   const [hasSubmitted, setHasSubmitted] = useState(false);
-  const [submittedName, setSubmittedName] = useState(null);
+  const [submittedData, setSubmittedData] = useState(null);
+  const [submitStatus, setSubmitStatus] = useState(SUBMIT_STATUS.idle);
 
   const errors = validateForm(values);
   const errorCount = Object.keys(errors).length;
@@ -16,7 +33,6 @@ function SimpleForm({ initialValues = INITIAL_VALUES }) {
 
   function setFieldValue(name, value) {
     setValues((previous) => ({ ...previous, [name]: value }));
-    setSubmittedName(null);
   }
 
   function markTouched(name) {
@@ -25,20 +41,49 @@ function SimpleForm({ initialValues = INITIAL_VALUES }) {
     );
   }
 
+  function focusField(name) {
+    const element = formRef.current?.elements.namedItem(name);
+    if (element instanceof HTMLElement) {
+      element.focus();
+    }
+  }
+
   function handleSubmit(event) {
     event.preventDefault();
-    setHasSubmitted(true);
-    if (isValid) {
-      setSubmittedName(values.fullName.trim());
+
+    if (!isValid) {
+      flushSync(() => {
+        setHasSubmitted(true);
+        setSubmittedData(null);
+        setSubmitStatus(SUBMIT_STATUS.error);
+      });
+      const firstInvalidField = FIELD_ORDER.find((name) => name in errors);
+      if (firstInvalidField) {
+        focusField(firstInvalidField);
+      }
+      return;
     }
+
+    setHasSubmitted(true);
+    setSubmittedData({ ...values });
+    setSubmitStatus(SUBMIT_STATUS.success);
+  }
+
+  function handleReset() {
+    setValues(initialValues);
+    setTouched({});
+    setHasSubmitted(false);
+    setSubmittedData(null);
+    setSubmitStatus(SUBMIT_STATUS.idle);
+    focusField(FIELD_NAMES.fullName);
   }
 
   let statusMessage = "";
   let statusClassName = styles.status;
-  if (submittedName !== null) {
-    statusMessage = `Đã gửi thành công thông tin của ${submittedName}.`;
+  if (submitStatus === SUBMIT_STATUS.success) {
+    statusMessage = "Gửi thành công! Dữ liệu bạn vừa gửi được hiển thị bên dưới.";
     statusClassName = `${styles.status} ${styles.statusSuccess}`;
-  } else if (hasSubmitted && !isValid) {
+  } else if (submitStatus === SUBMIT_STATUS.error && !isValid) {
     statusMessage = `Chưa gửi được: biểu mẫu còn ${errorCount} lỗi. Vui lòng sửa các ô được đánh dấu.`;
     statusClassName = `${styles.status} ${styles.statusError}`;
   }
@@ -55,22 +100,27 @@ function SimpleForm({ initialValues = INITIAL_VALUES }) {
 
   return (
     <FormContext value={contextValue}>
-      <form className={styles.form} noValidate onSubmit={handleSubmit}>
+      <form
+        ref={formRef}
+        className={styles.form}
+        noValidate
+        onSubmit={handleSubmit}
+      >
         <InputField
           name={FIELD_NAMES.fullName}
-          label="Họ tên"
+          label={FIELD_LABELS.fullName}
           type="text"
           autoComplete="name"
         />
         <InputField
           name={FIELD_NAMES.email}
-          label="Email"
+          label={FIELD_LABELS.email}
           type="email"
           autoComplete="email"
         />
         <InputField
           name={FIELD_NAMES.age}
-          label="Tuổi"
+          label={FIELD_LABELS.age}
           type="number"
           min={16}
           max={100}
@@ -78,25 +128,42 @@ function SimpleForm({ initialValues = INITIAL_VALUES }) {
         />
         <InputField
           name={FIELD_NAMES.password}
-          label="Mật khẩu"
+          label={FIELD_LABELS.password}
           type="password"
           autoComplete="new-password"
         />
         <InputField
           name={FIELD_NAMES.confirmPassword}
-          label="Nhập lại mật khẩu"
+          label={FIELD_LABELS.confirmPassword}
           type="password"
           autoComplete="new-password"
         />
 
-        <button type="submit" className={styles.submit}>
-          Gửi
-        </button>
+        <div className={styles.actions}>
+          <button type="submit" className={styles.submit}>
+            Gửi
+          </button>
+          <button
+            type="button"
+            className={styles.secondary}
+            onClick={handleReset}
+          >
+            Làm lại
+          </button>
+        </div>
 
         <p className={statusClassName} role="status" aria-live="polite">
           {statusMessage}
         </p>
       </form>
+
+      {submittedData !== null && (
+        <ShowData
+          data={submittedData}
+          labels={FIELD_LABELS}
+          secretFields={SECRET_FIELDS}
+        />
+      )}
     </FormContext>
   );
 }

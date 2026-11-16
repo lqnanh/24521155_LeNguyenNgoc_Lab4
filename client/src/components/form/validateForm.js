@@ -1,18 +1,4 @@
-export const FIELD_NAMES = {
-  fullName: "fullName",
-  email: "email",
-  age: "age",
-  password: "password",
-  confirmPassword: "confirmPassword",
-};
-
-export const INITIAL_VALUES = {
-  [FIELD_NAMES.fullName]: "",
-  [FIELD_NAMES.email]: "",
-  [FIELD_NAMES.age]: "",
-  [FIELD_NAMES.password]: "",
-  [FIELD_NAMES.confirmPassword]: "",
-};
+import { FIELD_NAMES } from "./formFields.js";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const INTEGER_PATTERN = /^-?\d+$/;
