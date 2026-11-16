@@ -5,6 +5,7 @@ const NAV_LINKS = [
   { id: "home", to: "/", label: "Trang chủ", end: true },
   { id: "people", to: "/people", label: "Danh bạ", end: false },
   { id: "form", to: "/form", label: "Biểu mẫu", end: false },
+  { id: "forum", to: "/forum", label: "Diễn đàn", end: false },
 ];
 
 function getLinkClass({ isActive }) {

@@ -1,0 +1,69 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.channelList {
+  display: flex;
+  flex-wrap: wrap; /* màn 375px: link tự xuống dòng, không tràn ngang */
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.channelLink {
+  display: inline-block;
+  min-height: 44px; /* đủ lớn để bấm trên điện thoại */
+  padding: 0.6rem 1rem;
+  box-sizing: border-box;
+  border: 2px solid #9ca3af;
+  border-radius: 999px;
+  color: #1f2937;
+  background: #ffffff;
+  text-decoration: none;
+  line-height: 1.2;
+}
+
+.channelLink:hover {
+  border-color: #1d4ed8;
+}
+
+/* Kênh đang xem: đổi nền + chữ đậm + viền, không chỉ dựa vào màu */
+.channelLinkActive {
+  border-color: #1d4ed8;
+  color: #ffffff;
+  background: #1d4ed8;
+  font-weight: 700;
+}
+
+/* Viền rõ khi dùng phím Tab */
+.channelLink:focus-visible {
+  outline: 3px solid #f59e0b;
+  outline-offset: 3px;
+}
+
+.current {
+  margin: 0;
+}
+
+.error {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  border: 2px solid #b91c1c;
+  border-radius: 0.5rem;
+  color: #7f1d1d;
+  background: #fef2f2;
+  overflow-wrap: anywhere; /* tên kênh dài trên địa chỉ không làm tràn màn hình */
+}
