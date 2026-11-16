@@ -22,3 +22,11 @@
 
 7. Bỏ dòng favicon khỏi index.html mà không thay bằng gì, Chrome tự tìm /favicon.ico nên Console báo lỗi 404.
    Sửa: thêm <link rel="icon" href="data:," /> vào <head> của index.html để khai báo icon rỗng.
+
+## 1.2
+
+8. Viết lại toàn bộ App.jsx theo đoán: bọc thêm BrowserRouter (main.jsx đã có, lồng 2 router sẽ lỗi), import PeoplePage đã xoá, làm mất route lồng people/:id, lazy + Suspense và prop people.
+   Sửa: giữ nguyên App.jsx cũ, chỉ thêm import FormPage và <Route path="form" element={<FormPage />} />.
+
+9. Thay toàn bộ NavBar.module.css: chữ #1f2937 trên nền header #1e3a8a gần như không đọc được (sai tương phản WCAG), đổi tên class linkActive thành active.
+   Sửa: giữ nguyên NavBar.module.css cũ, NavBar.jsx chỉ đổi sang lặp mảng NAV_LINKS và thêm link "Biểu mẫu", vẫn dùng styles.linkActive.
